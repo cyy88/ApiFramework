@@ -30,6 +30,7 @@ if __name__ == '__main__':
     # 这个是直接打开测试报告，仅仅用于本地自己看
     os.system('allure serve report/data')
 
-
     # 终端输入
     # python run.py 测试环境名称    例如：python run.py yftest
+
+    # 本地项目开始提交代码
