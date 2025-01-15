@@ -1,0 +1,5 @@
+db: jxt_saas
+host: rm-bp11onw2yqbq44yel0o.mysql.rds.aliyuncs.com
+password: '!@#QWEasd'
+port: 3306
+user: jxt_saas

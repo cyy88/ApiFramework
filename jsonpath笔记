@@ -1,0 +1,13 @@
+我们通过解析响应数据列表字典等等方式会显得比较麻烦，特别是在响应结构复杂的情况下
+我们可以使用jsonpath的技术来快捷的提取想要的数据
+1.jsonpath的基本规则
+ jsonpath规则官网：https://goessner.net/articles/JsonPath/index.html#e2
+ 在线调试jsonpath：http://www.e123456.com/aaaphp/online/jsonpath/   打不开
+
+https://www.lddgo.net/string/jsonpath    用这个，可在线调试和学习规则
+
+
+
+2.jsonpath在接口自动化中数据提取的应用
+ 安装jsonpath的库
+ pip install jsonpath -i https://pypi.douban.com/simple

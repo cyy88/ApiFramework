@@ -1,0 +1,27 @@
+common:
+  username:     # 这里有多少个用户，就要有多少个并发进程
+  - sanya
+  - liyang
+  password:
+  - 'jt123456'
+  - 'jt123456'
+  tenant_id:
+  - '422'
+  - '421'
+
+http:
+  factory: https://admin.test.jietukj.com
+
+
+db:
+  # 洁小兔预发布环境数据库配置
+  host: rm-bp11onw2yqbq44yel0o.mysql.rds.aliyuncs.com
+  password: "!@#QWEasd"    # 密码里面有特殊字符#，需要用引号引起来
+  port: 3306
+  user: jxt_saas
+  db: jxt_saas
+
+redis:
+  host: 82.156.74.26
+  password: mtx
+  port: 6379

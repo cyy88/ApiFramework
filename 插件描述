@@ -1,0 +1,4 @@
+# BCrypt 哈希算法进行加密
+import bcrypt
+
+pytest-xdist  实现进程级别的并发
