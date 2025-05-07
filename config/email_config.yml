@@ -1,0 +1,17 @@
+# 邮件发送配置
+email:
+  # 发件人邮箱
+  sender: "2427811980@qq.com"
+  # QQ邮箱授权码，需要在QQ邮箱设置中开启SMTP服务并获取授权码
+  password: "shnvcwbqgauudiaf"
+  # SMTP服务器
+  smtp_server: "smtp.qq.com"
+  # SMTP端口
+  smtp_port: 465
+  # 收件人邮箱，可以是一个或多个
+  receivers:
+    - "2427811980@qq.com"
+  # 邮件主题前缀
+  subject_prefix: "接口自动化测试报告"
+  # 是否启用邮件发送功能
+  enabled: true 

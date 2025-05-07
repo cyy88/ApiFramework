@@ -22,4 +22,7 @@ http_yaml = f'{project_path}/config/http.yml'
 # 构造基本数据yaml文件路径
 common_yaml = f'{project_path}/config/common.yml'
 
+# 构造邮件配置yaml文件路径
+email_yaml = f'{project_path}/config/email_config.yml'
+
 
