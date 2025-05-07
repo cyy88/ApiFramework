@@ -19,6 +19,10 @@ class RequestsClient:
         self.resp = None
 
     def send(self):
+        """
+        发送请求方法
+        :return:
+        """
         # 发起之前记录请求信息，打印日志
         GetLogger.get_logger().debug(f'=================================================')
         GetLogger.get_logger().debug(f'接口url: {self.url}')

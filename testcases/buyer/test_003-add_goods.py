@@ -1,18 +1,16 @@
 import allure
 import pytest
 
-from api.factory.add_goods import AddGoods
-from api.factory.add_school import AddSchool
+from api.factory.goods.add_goods import AddGoods
 from common.file_load import *
 from common.json_util import update_value_to_json
-from common.time_format import *
 
 
 @allure.epic('商品管理模块')
 @allure.feature('添加商品')
 class TestAddSchoolApi:
     # 方法4
-    json = load_yaml_file(add_school_data_yaml)['添加商品接口']
+    json = load_yaml_file(data_yaml)['添加商品接口']
 
     # @pytest.mark.flaky(reruns=2, reruns_delay=2)  # 失败重试, reruns_delay为重试间隔时间单位是秒
     @allure.title('{casename}')
@@ -29,3 +27,6 @@ class TestAddSchoolApi:
             aalogger_init.error(f'{casename}接口返回信息为：{resp.json()}')
         else:
             aalogger_init.info(f'{casename}接口返回信息为：{resp.json()}')
+
+
+# docker run --name jenkins-docker --rm --detach --privileged --network jenkins --network-alias docker --env DOCKER_TLS_CERTDIR=/certs --volume jenkins-docker-certs:/certs/client --volume jenkins-data:/var/jenkins_home --publish 2376:2376 docker:dind --storage-driver overlay2

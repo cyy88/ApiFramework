@@ -1,8 +1,7 @@
 import allure
-import jsonpath
 import pytest
 
-from api.factory.select_school import SelectSchool
+from api.factory.school.select_school import SelectSchool
 from common.json_util import extract_json
 
 

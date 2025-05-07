@@ -39,7 +39,7 @@ def gen_timestamp(start_date='+0d', end_date='+1d'):
     return int(time.mktime(date_time.timetuple()))
 
 
-def cur_date():  # 2024-09-29
+def cur_date():
     """
     生成当前日期 2024-09-29
     :return:
@@ -47,7 +47,7 @@ def cur_date():  # 2024-09-29
     return fake.date_between_dates()
 
 
-def cur_date_time():  # 2022-09-29 10:07:33
+def cur_date_time():
     """
     生成当前日期时间 2024-09-29 10:07:33
     :return:
@@ -71,16 +71,50 @@ def rdm_date_time():
     """
     return fake.date_time()
 
+def rdm_name():
+    """
+    随机生成姓名
+    :return:
+    """
+    return fake.name()
+
+def rdm_id_card():
+    """
+    随机生成身份证
+    :return:
+    """
+    return fake.ssn()
+
+def rdm_email():
+    """
+    随机生成邮箱
+    :return:
+    """
+    return fake.email()
+
+def rdm_address():
+    """
+    随机生成地址
+    :return:
+    """
+    return fake.address()
+
 
 if __name__ == '__main__':
-    print(rdm_phone_number())
-    print(rdm_date())
-    print(rdm_date_time())
-    print(cur_date())
-    print(cur_timestamp())
-    print(cur_date_time())
+    print("电话号码："+rdm_phone_number())
+    print("随机日期："+rdm_date())
+    print("随机地址："+rdm_address())
+    print("随机邮箱："+rdm_email())
+    print("姓名："+rdm_name())
+    print("身份证："+rdm_id_card())
+    print("随机日期时间："+str(rdm_date_time()))
+    print("当前日期："+cur_date().__str__())
+    print("当前日期时间戳："+cur_timestamp().__str__())
+    print("当前日期时间："+cur_date_time().__str__())
     # print(time.time())
     # print(time.time()*1000)
-    print(gen_timestamp(start_date="-10d", end_date='+7d'))  # day
-    print(gen_timestamp(start_date="+0d", end_date='+7d'))
+    print("生成指定范围内的时间戳："+gen_timestamp(start_date="-10d", end_date='+7d').__str__())  # day
     print(gen_timestamp('-7d', '-6d'))
+    print(rdm_name())
+    print(rdm_id_card())
+

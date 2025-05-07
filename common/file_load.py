@@ -1,7 +1,7 @@
 import openpyxl
 import yaml
 
-from paths_manager import add_school_data_yaml
+from paths_manager import data_yaml
 
 
 def read_excel(filepath, sheet_name):
@@ -59,4 +59,4 @@ def write_yaml(filepath, content):
 # 这里调试是没有问题的，但是在run.py中是会报错的，路径错误
 if __name__ == '__main__':
     print(read_excel('../data/add_school_data.xlsx', '添加学校测试数据'))  # 第一个参数是excel文件路径，第二个参数是sheet页名称
-    print(load_yaml_file(add_school_data_yaml))
+    print(load_yaml_file(data_yaml))
