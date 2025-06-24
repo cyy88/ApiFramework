@@ -253,6 +253,250 @@ def test_add_school(self, casename, school_name, school_type, isHaveCard, school
 - **轻量化**：减少不必要的依赖，优化启动时间
 - **兼容性测试**：确保在不同 Python 版本下的兼容性
 
+## 通用化改造完成
+
+### 🎉 框架已完成通用化改造！
+
+本框架现已从特定业务的测试框架升级为**通用的API测试框架**，支持各种项目的接口测试需求。
+
+### 🚀 新增核心功能
+
+#### 1. 通用API基类
+- **多种认证方式**：Bearer Token、Basic Auth、API Key、自定义认证
+- **多协议支持**：REST API、GraphQL、gRPC（可扩展）
+- **灵活配置**：支持多服务、多环境配置
+
+#### 2. 插件系统
+- **可扩展架构**：支持自定义插件开发
+- **内置插件**：认证、数据源、验证器、报告器等
+- **钩子机制**：请求前后、测试前后等多个钩子点
+
+#### 3. 智能配置管理
+- **环境变量覆盖**：支持通过环境变量动态配置
+- **多格式支持**：YAML、JSON、环境变量
+- **配置验证**：自动验证配置完整性
+
+#### 4. 强大的断言系统
+- **多种验证规则**：等于、包含、正则、长度等
+- **JSONPath支持**：灵活的JSON数据提取
+- **自定义验证器**：支持复杂业务逻辑验证
+
+#### 5. 测试数据管理
+- **多数据源**：YAML、Excel、JSON、数据库
+- **数据生成**：Faker集成，自动生成测试数据
+- **数据转换**：支持数据过滤、转换、参数化
+
+#### 6. CLI工具
+- **项目初始化**：快速创建新项目
+- **测试执行**：灵活的测试运行选项
+- **数据生成**：命令行生成测试数据
+
+### 📖 快速开始（新项目）
+
+#### 1. 使用CLI创建新项目
+```bash
+# 创建REST API测试项目
+python cli.py init my-api-test --type rest_api
+
+# 创建GraphQL测试项目
+python cli.py init my-graphql-test --type graphql
+
+# 创建gRPC测试项目
+python cli.py init my-grpc-test --type grpc
+```
+
+#### 2. 配置项目
+```bash
+cd my-api-test
+pip install -r requirements.txt
+
+# 编辑配置文件
+vim config/env_local.yml
+```
+
+#### 3. 编写测试用例
+```python
+from common.base_test import RestApiTestCase
+from common.assertion import ValidationRule
+from api.base_api import BaseApi, AuthType
+
+class MyApi(BaseApi):
+    def __init__(self):
+        super().__init__(
+            service_name="my_service",
+            auth_type=AuthType.BEARER
+        )
+
+    def get_data(self):
+        self.method = "GET"
+        self.url = self.build_url("data")
+        return self.send()
+
+class TestMyApi(RestApiTestCase):
+    def test_get_data(self):
+        api = MyApi()
+        response = api.get_data()
+
+        rules = [
+            self.create_validation_rule("$.code", "eq", 200),
+            self.create_validation_rule("$.data", "is_not_null")
+        ]
+
+        self.assert_response(response, status_code=200, json_rules=rules)
+```
+
+#### 4. 运行测试
+```bash
+# 使用CLI运行
+python cli.py run --env local
+
+# 或使用传统方式
+python run.py --env local
+```
+
+### 🔧 适配现有项目
+
+对于现有项目，可以逐步迁移：
+
+#### 1. 更新API基类
+```python
+# 旧方式
+class MyApi(BaseFactoryApi):
+    pass
+
+# 新方式
+class MyApi(BaseApi):
+    def __init__(self):
+        super().__init__(
+            service_name="my_service",
+            auth_type=AuthType.BEARER
+        )
+```
+
+#### 2. 使用新的测试基类
+```python
+# 旧方式
+class TestMyApi:
+    pass
+
+# 新方式
+class TestMyApi(RestApiTestCase):
+    pass
+```
+
+#### 3. 使用新的断言系统
+```python
+# 旧方式
+assert response.status_code == 200
+assert response.json()['code'] == 200
+
+# 新方式
+rules = [
+    self.create_validation_rule("$.code", "eq", 200)
+]
+self.assert_response(response, status_code=200, json_rules=rules)
+```
+
+### 🎯 支持的项目类型
+
+#### REST API项目
+- 标准的RESTful API测试
+- 支持各种HTTP方法
+- JSON/XML数据格式支持
+
+#### GraphQL项目
+- GraphQL查询和变更测试
+- Schema验证
+- 查询优化分析
+
+#### gRPC项目
+- Protocol Buffers支持
+- 流式RPC测试
+- 服务发现集成
+
+#### 微服务项目
+- 多服务协调测试
+- 服务间依赖管理
+- 分布式追踪支持
+
+### 🔌 插件开发
+
+#### 创建自定义插件
+```python
+from common.plugin_system import Plugin, PluginType
+
+class MyCustomPlugin(Plugin):
+    def get_plugin_type(self) -> PluginType:
+        return PluginType.VALIDATOR
+
+    def initialize(self, config):
+        # 初始化逻辑
+        pass
+
+    def validate(self, response, rules):
+        # 自定义验证逻辑
+        pass
+
+# 注册插件
+plugin_manager.register_plugin(MyCustomPlugin())
+```
+
+### 📊 监控和报告
+
+#### 性能监控
+- 自动记录响应时间
+- 慢请求告警
+- 性能趋势分析
+
+#### 详细报告
+- Allure集成报告
+- 自定义报告格式
+- 邮件自动发送
+
+### 🛠️ 最佳实践
+
+#### 1. 项目结构
+```
+my-project/
+├── api/                    # API封装
+│   ├── base_api.py        # 基础API类
+│   └── user_api.py        # 具体API实现
+├── testcases/             # 测试用例
+│   └── test_user.py       # 测试实现
+├── config/                # 配置文件
+│   └── env_local.yml      # 环境配置
+├── data/                  # 测试数据
+│   └── users.yml          # 数据文件
+└── plugins/               # 自定义插件
+    └── my_plugin.py       # 插件实现
+```
+
+#### 2. 配置管理
+- 使用环境变量覆盖敏感配置
+- 分环境管理配置文件
+- 配置验证和默认值设置
+
+#### 3. 测试数据
+- 使用数据生成器创建测试数据
+- 实现测试数据隔离
+- 自动清理测试数据
+
+#### 4. 错误处理
+- 统一的异常处理机制
+- 详细的错误日志记录
+- 失败重试和恢复策略
+
+### 📚 更多示例
+
+查看 `examples/` 目录获取更多使用示例：
+- `rest_api_example.py` - REST API测试示例
+- `database_example.py` - 数据库测试示例
+- `plugin_example.py` - 插件开发示例
+
+### 🤝 贡献指南
+
+欢迎贡献代码和建议！请查看 `CONTRIBUTING.md` 了解详细的贡献指南。
+
 ## 联系方式
 
-如有问题或建议，请联系项目维护者。
+如有问题或建议，请联系项目维护者或提交Issue。
