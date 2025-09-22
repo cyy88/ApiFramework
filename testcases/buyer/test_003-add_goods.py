@@ -1,18 +1,16 @@
 import allure
 import pytest
 
-from api.factory.add_goods import AddGoods
-from api.factory.add_school import AddSchool
+from api.factory.goods.add_goods import AddGoods
 from common.file_load import *
 from common.json_util import update_value_to_json
-from common.time_format import *
 
 
 @allure.epic('商品管理模块')
 @allure.feature('添加商品')
 class TestAddSchoolApi:
     # 方法4
-    json = load_yaml_file(add_school_data_yaml)['添加商品接口']
+    json = load_yaml_file(data_yaml)['添加商品接口']
 
     # @pytest.mark.flaky(reruns=2, reruns_delay=2)  # 失败重试, reruns_delay为重试间隔时间单位是秒
     @allure.title('{casename}')

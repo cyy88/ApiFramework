@@ -1,0 +1,224 @@
+# 通用环境配置模板
+# 复制此文件并重命名为 env_<环境名>.yml，如 env_dev.yml, env_test.yml, env_prod.yml
+
+# 通用配置
+common:
+  # 用户认证信息（支持多用户）
+  username: 
+    - user1
+    - user2
+  password:
+    - password1
+    - password2
+  # 租户ID（多租户系统）
+  tenant_id:
+    - tenant1
+    - tenant2
+  # API版本
+  api_version: "v1"
+  # 默认超时时间（秒）
+  timeout: 30
+
+# HTTP服务配置
+http:
+  # 默认服务地址
+  default: "https://api.example.com"
+  # 具体服务地址
+  user_service: "https://user-api.example.com"
+  order_service: "https://order-api.example.com"
+  payment_service: "https://payment-api.example.com"
+  # 是否验证SSL证书
+  verify_ssl: false
+  # 请求超时时间
+  timeout: 30
+  # 重试配置
+  retry_count: 3
+  retry_delay: 1.0
+
+# 数据库配置
+db:
+  # 主数据库
+  host: "localhost"
+  port: 3306
+  user: "test_user"
+  password: "test_password"
+  database: "test_db"
+  charset: "utf8mb4"
+  # 连接池配置
+  pool_size: 10
+  max_overflow: 20
+  # 从数据库（读写分离）
+  slave_hosts:
+    - "slave1.example.com"
+    - "slave2.example.com"
+
+# Redis配置
+redis:
+  # 单机配置
+  host: "localhost"
+  port: 6379
+  password: ""
+  db: 0
+  # 集群配置
+  cluster_nodes:
+    - "redis1.example.com:6379"
+    - "redis2.example.com:6379"
+    - "redis3.example.com:6379"
+  # 连接池配置
+  max_connections: 50
+
+# 消息队列配置（可选）
+mq:
+  # RabbitMQ
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+    virtual_host: "/"
+  # Kafka
+  kafka:
+    bootstrap_servers:
+      - "kafka1.example.com:9092"
+      - "kafka2.example.com:9092"
+    group_id: "test_group"
+
+# 认证配置
+auth:
+  # 默认服务认证
+  default:
+    type: "bearer"  # bearer, basic, api_key, custom
+    username: "api_user"
+    password: "api_password"
+    token: ""
+    api_key: ""
+    headers:
+      X-API-Key: "your_api_key"
+  
+  # 用户服务认证
+  user_service:
+    type: "bearer"
+    login_url: "/auth/login"
+    refresh_url: "/auth/refresh"
+    username: "user_admin"
+    password: "admin_password"
+  
+  # OAuth2配置
+  oauth2:
+    client_id: "your_client_id"
+    client_secret: "your_client_secret"
+    auth_url: "https://auth.example.com/oauth/authorize"
+    token_url: "https://auth.example.com/oauth/token"
+    scope: "read write"
+
+# 邮件配置
+email:
+  enabled: false
+  sender: "test@example.com"
+  password: "email_password"
+  smtp_server: "smtp.example.com"
+  smtp_port: 465
+  use_tls: true
+  receivers:
+    - "dev@example.com"
+    - "qa@example.com"
+  subject_prefix: "API Test Report"
+
+# 监控配置
+monitoring:
+  # Prometheus
+  prometheus:
+    enabled: false
+    host: "localhost"
+    port: 9090
+  # Grafana
+  grafana:
+    enabled: false
+    host: "localhost"
+    port: 3000
+    username: "admin"
+    password: "admin"
+
+# 日志配置
+logging:
+  level: "DEBUG"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] - %(message)s"
+  file_enabled: true
+  file_path: "logs/test.log"
+  max_file_size: "10MB"
+  backup_count: 5
+
+# 测试配置
+test:
+  # 并发配置
+  parallel_workers: 2
+  # 失败重试
+  retry_failed: true
+  retry_count: 2
+  retry_delay: 1
+  # 数据隔离
+  data_isolation: true
+  # 测试数据清理
+  cleanup_data: true
+  # 截图配置
+  screenshot_on_failure: true
+  screenshot_path: "report/screenshots"
+
+# 第三方服务配置
+external_services:
+  # 短信服务
+  sms:
+    provider: "aliyun"  # aliyun, tencent, twilio
+    access_key: "your_access_key"
+    secret_key: "your_secret_key"
+    sign_name: "测试签名"
+  
+  # 对象存储
+  oss:
+    provider: "aliyun"  # aliyun, aws, qcloud
+    endpoint: "oss-cn-hangzhou.aliyuncs.com"
+    access_key: "your_access_key"
+    secret_key: "your_secret_key"
+    bucket: "test-bucket"
+  
+  # 支付服务
+  payment:
+    alipay:
+      app_id: "your_app_id"
+      private_key: "your_private_key"
+      public_key: "alipay_public_key"
+      sandbox: true
+    wechat:
+      app_id: "your_app_id"
+      mch_id: "your_mch_id"
+      api_key: "your_api_key"
+      sandbox: true
+
+# 环境特定配置
+environment:
+  name: "test"  # dev, test, staging, prod
+  debug: true
+  mock_enabled: false
+  cache_enabled: true
+  
+# 插件配置
+plugins:
+  enabled:
+    - "auth_plugin"
+    - "data_plugin"
+    - "report_plugin"
+  disabled:
+    - "mock_plugin"
+  
+  # 插件特定配置
+  auth_plugin:
+    auto_refresh: true
+    refresh_threshold: 300  # 5分钟
+  
+  data_plugin:
+    cache_size: 1000
+    ttl: 3600  # 1小时
+  
+  report_plugin:
+    format: "allure"
+    output_path: "report/data"

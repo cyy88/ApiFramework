@@ -8,7 +8,7 @@ project_path = os.path.dirname(__file__)
 add_school_data_xlsx = f'{project_path}/data/add_school_data.xlsx'
 
 # 构造学校数据YAML文件的路径
-add_school_data_yaml = f'{project_path}/data/add_school_data.yml'
+data_yaml = f'{project_path}/data/data.yml'
 
 # 构造数据库yaml文件路径
 db_yaml = f'{project_path}/config/db.yml'
@@ -21,5 +21,8 @@ http_yaml = f'{project_path}/config/http.yml'
 
 # 构造基本数据yaml文件路径
 common_yaml = f'{project_path}/config/common.yml'
+
+# 构造邮件配置yaml文件路径
+email_yaml = f'{project_path}/config/email_config.yml'
 
 

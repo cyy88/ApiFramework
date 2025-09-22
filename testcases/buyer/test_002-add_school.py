@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from api.factory.add_school import AddSchool
+from api.factory.school.add_school import AddSchool
 from common.file_load import *
 from common.time_format import *
 
@@ -26,7 +26,7 @@ class TestAddSchoolApi:
     # json = read_excel(add_school_data_xlsx, "添加学校测试数据")
 
     # 方法4
-    json = load_yaml_file(add_school_data_yaml)['添加学校接口']
+    json = load_yaml_file(data_yaml)['添加学校接口']
 
     @pytest.mark.flaky(reruns=2, reruns_delay=2)  # 失败重试, reruns_delay为重试间隔时间单位是秒
     @allure.title('{casename}')

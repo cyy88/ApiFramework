@@ -1,0 +1,87 @@
+# 测试框架核心依赖
+pytest>=7.0.0
+pytest-xdist>=3.0.0  # 并发执行支持
+pytest-rerunfailures>=11.0  # 失败重试支持
+pytest-assume>=2.4.0  # 软断言支持
+pytest-html>=3.1.0  # HTML报告生成
+
+# HTTP 客户端
+requests>=2.28.0
+urllib3>=1.26.0
+
+# 测试报告生成
+allure-pytest>=2.12.0
+
+# 数据处理
+PyYAML>=6.0
+openpyxl>=3.1.0  # Excel 文件处理
+jsonpath>=0.82  # JSON 路径解析
+jsonpath-ng>=1.5.0  # 增强的 JSON 路径解析
+faker>=18.0.0  # 随机数据生成
+
+# 数据库连接
+PyMySQL>=1.0.0  # MySQL 数据库连接
+SQLAlchemy>=1.4.0  # ORM支持（可选）
+
+# Redis 连接
+redis>=4.5.0
+
+# Java 对象序列化（用于 Redis）
+javaobj-py3>=0.4.0
+
+# JSON Schema验证
+jsonschema>=4.0.0
+
+# 配置管理
+python-dotenv>=0.19.0  # 环境变量支持
+
+# 日志和工具
+typing-extensions>=4.0.0  # 类型注解支持
+colorlog>=6.0.0  # 彩色日志输出
+
+# 性能监控
+psutil>=5.9.0  # 系统性能监控
+
+# 数据验证
+cerberus>=1.3.0  # 数据验证库
+
+# 加密支持
+cryptography>=3.4.0  # 加密解密
+
+# 时间处理
+python-dateutil>=2.8.0
+
+# 网络工具
+ping3>=4.0.0  # 网络连通性测试
+
+# 代码质量工具（开发环境）
+black>=22.0.0  # 代码格式化
+flake8>=4.0.0  # 代码检查
+isort>=5.10.0  # 导入排序
+mypy>=0.950  # 类型检查
+
+# 文档生成
+mkdocs>=1.4.0  # 文档生成
+mkdocs-material>=8.0.0  # 文档主题
+
+# 邮件发送（标准库，无需安装）
+# smtplib - 标准库
+# email - 标准库
+
+# 系统工具（标准库，无需安装）
+# subprocess - 标准库
+# socket - 标准库
+# zipfile - 标准库
+# os - 标准库
+# sys - 标准库
+# time - 标准库
+# datetime - 标准库
+# logging - 标准库
+# pathlib - 标准库
+# abc - 标准库
+# enum - 标准库
+# json - 标准库
+# re - 标准库
+# base64 - 标准库
+# hashlib - 标准库
+# uuid - 标准库
